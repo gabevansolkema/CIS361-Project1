@@ -32,33 +32,42 @@ int main(int argc, char *argv[]) {
 
 	char encrypt[26], decrypt[26];
 	char *key;
-	
 	FILE *fin, *fout;
 		
+	printf("\n"); 
+
 	fin = fopen(argv[3], "r");
   	fout = fopen(argv[4], "w");
   	if (fin ==  NULL || fout == NULL) {
-    		printf("File could not be opened\n");
+		printf("Usage: option, key, infile, outfile\n");
+    		printf("File could not be opened\n\n");
     		exit(1);
   	}
 
 	key = removeDuplicates(argv[2]);
-	
+	if (strlen(key) > 26) { 
+		printf("Usage: option, key, infile, outfile\n");
+		printf("Key cannot be greater than 26 characters\n\n");
+		exit(1);
+	}	
 	
 	//removeDuplicates(key);
 	printf("\nOriginal key: %s\n", argv[2]);
-	printf("New key without duplicate characters: %s\n\n", key);	
+	printf("New key without duplicate characters: %s\n", key);	
 
 	initializeEncryptArray(key, encrypt);
 	initializeDecryptArray(encrypt, decrypt);
 
-       	if (*argv[1] == 1) {
+       	if (*argv[1] == '1') {
 //                processInput(fin, fout, encrypt);
-	} else if (*argv[2] == 2) {
+	} else if (*argv[1] == '2') {
 //                processInput(fin, fout, decrypt);
 	} else {
-		  printf("Number not recognized\n");
-		  printf("Option: 1 for encryption, 2 for decryption\n");
+		printf("Here is the option you gave: %s\n", argv[1]);
+		printf("Usage: option, key, infile, outfile\n");  
+		printf("Option not recognized\n");
+		printf("Option: 1 for encryption, 2 for decryption\n");
+		exit(1);
 	}
 
 	fclose(fin);
