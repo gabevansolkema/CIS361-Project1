@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
 		
 	printf("\n"); 
 
+	// Assigns files from arguments
 	fin = fopen(argv[3], "r");
   	fout = fopen(argv[4], "w");
   	if (fin ==  NULL || fout == NULL) {
@@ -45,18 +46,20 @@ int main(int argc, char *argv[]) {
   	}
 
 	key = removeDuplicates(argv[2]);
-	if (strlen(key) > 26) { 
-		printf("Usage: option, key, infile, outfile\n");
-		printf("Key cannot be greater than 26 characters\n\n");
-		exit(1);
-	}	
+//	if (strlen(key) > 26) { 
+//		printf("Usage: option, key, infile, outfile\n");
+//		printf("Key cannot be greater than 26 characters\n\n");
+//		exit(1);
+//	}	
 	
-	printf("\nOriginal key: %s\n", argv[2]);
-	printf("New key without duplicate characters: %s\n", key);	
+//	printf("\nOriginal key: %s\n", argv[2]);
+//	printf("New key without duplicate characters: %s\n", key);	
 
+	// Initializes encrypt and decrypt arrays
 	initializeEncryptArray(key, encrypt);
 	initializeDecryptArray(encrypt, decrypt);
 
+	// Processes input based on option argument
        	if (*argv[1] == '1') {
                 processInput(fin, fout, encrypt);
 	} else if (*argv[1] == '2') {
@@ -68,12 +71,13 @@ int main(int argc, char *argv[]) {
 		printf("Option: 1 for encryption, 2 for decryption\n");
 		exit(1);
 	}
-
+	
 	fclose(fin);
 	fclose(fout);
-	printf("encrypted array: %s\n\n", encrypt);	
+//	printf("encrypted array: %s\n\n", encrypt);	
 
 }
+
 
 // Searches array for duplicate letter
 // Returns 1 if target found, returns 0 if target not found
@@ -87,6 +91,7 @@ int targetFound(char charArray[], int num, char target){
 	return 0;  
 }
 
+
 // Returns array of chars without duplicates
 char* removeDuplicates(char word []) {
   	char *key = malloc(sizeof(char) * 26);
@@ -95,14 +100,21 @@ char* removeDuplicates(char word []) {
 
   	for(x=0; x < strlen(word); x++) {
     		if(targetFound(word, x, word[x]) != 1) {
-      			//z++;
-			key[z++] = word[x];
+			if (islower(word[x])) {
+				printf("Usage: option, key, infile, outfile\n");
+				printf("Key needs to be uppercase\n\n");
+				exit(1);
+			}
+
+			key[z] = word[x];
+			z++;
 		}
   	}	
   	key[z] = '\0';
 
   	return key;
 }
+
 
 // Initializes the encrypt array
 void initializeEncryptArray(char key[], char encrypt[]) {
@@ -111,7 +123,6 @@ void initializeEncryptArray(char key[], char encrypt[]) {
 
 	for(x=0; x < 26; x++) {
 		// Goes through key array and assigns values to encrypt array
-		// This is why the key array cannot be greater than 26
 		if(x < strlen(key)) {
 			encrypt[x] = key[x];
 		} else {
@@ -132,7 +143,8 @@ void initializeEncryptArray(char key[], char encrypt[]) {
 	encrypt[x] = '\0';
 }
 
-// Initializes the decrypt array
+
+// Initializes the decrypt array using the encrypt array
 void initializeDecryptArray(char encrypt[], char decrypt[]) {
 	int x;
 	
@@ -143,17 +155,20 @@ void initializeDecryptArray(char encrypt[], char decrypt[]) {
 	decrypt[x] = '\0';
 }
 
+
+// Process input based on option
+// Reads a file in and writes a file out
+// Uses either the decrypt or encrypt array 
 void processInput(FILE * inf, FILE * outf, char substitute[]){
 	char ch;
 
 	while (fscanf(inf, "%c", &ch) != EOF) {
-		if(!isalpha(ch)){
+		if(!isalpha(ch)) {
 			fprintf(outf, "%c", ch);
-		} else if(islower(ch)){
-			ch = ch - 32;
-			fprintf(outf, "%c", substitute[ch - 65]);
 		} else {
-	      		fprintf(outf, "%c", substitute[ch - 65]);
+			if (islower(ch)) 
+				ch = ch - 32;
+			fprintf(outf, "%c", substitute[ch - 65]);
 		}
       }
 
