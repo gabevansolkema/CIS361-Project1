@@ -1,0 +1,19 @@
+Script started on Thu Oct  6 16:11:57 2016
+[?1034hbash-3.2$ make test1
+./project1 1 HELLO data1.txt dataEncrypted1.txt
+
+./project1 2 HELLO dataEncrypted1.txt dataDecrypted1.txt
+
+diff -s data1.txt dataDecrypted1.txt
+Files data1.txt and dataDecrypted1.txt are identical
+bash-3.2$ make test2
+./project1 1 ARAGORNDUNEDAIN data2.txt dataEncrypted2.txt
+
+./project1 2 ARAGORNDUNEDAIN dataEncrypted2.txt dataDecrypted2.txt
+
+diff -s data2.txt dataDecrypted2.txt
+Files data2.txt and dataDecrypted2.txt are identical
+bash-3.2$ exit
+exit
+
+Script done on Thu Oct  6 16:12:07 2016
