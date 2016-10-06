@@ -10,5 +10,5 @@ test1:
 
 test2:
 	./project1 1 ARAGORNDUNEDAIN data2.txt dataEncrypted2.txt
-	./project1 2 HELLO dataEncrypted2.txt dataDecrypted.txt
+	./project1 2 ARAGORNDUNEDAIN dataEncrypted2.txt dataDecrypted.txt
 	diff -s data2.txt dataDecrypted2.txt

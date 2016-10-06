@@ -1,0 +1,35 @@
+commit 1631a05e258aec439cf9f1bf77abebf692abc224
+Author: Gabe VanSolkema <gabejvansolkema@gmail.com>
+Date:   Thu Oct 6 15:05:22 2016 -0400
+
+    Comments, second data set, makefile
+
+commit 22cc456a7610d1bfd13447e5527dced4e7eff668
+Author: Gabe VanSolkema <gabejvansolkema@gmail.com>
+Date:   Thu Oct 6 13:51:02 2016 -0400
+
+    Process input
+
+commit c983385c86e5312ffe8380632d559e52976337e0
+Author: Gabe VanSolkema <gabejvansolkema@gmail.com>
+Date:   Thu Oct 6 10:13:21 2016 -0400
+
+    Correctly checks for choice, file, and key input
+
+commit 7a127a0c44c1da68e78cbf9f8694a2acf8652bd2
+Author: Gabe VanSolkema <gabejvansolkema@gmail.com>
+Date:   Thu Oct 6 09:38:39 2016 -0400
+
+    Initialize encrypt/decrypt and some other changes
+
+commit 83acee30f54f335d62812d2fb780ed6683d88541
+Author: Gabe VanSolkema <gabejvansolkema@gmail.com>
+Date:   Thu Oct 6 01:20:54 2016 -0400
+
+    Create README.md
+
+commit 13438a51e1740e264777c50802e007fc151d26ca
+Author: Gabe VanSolkema <gabejvansolkema@gmail.com>
+Date:   Thu Oct 6 01:19:01 2016 -0400
+
+    Helper functions
