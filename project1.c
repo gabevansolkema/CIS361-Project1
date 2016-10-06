@@ -51,7 +51,6 @@ int main(int argc, char *argv[]) {
 		exit(1);
 	}	
 	
-	//removeDuplicates(key);
 	printf("\nOriginal key: %s\n", argv[2]);
 	printf("New key without duplicate characters: %s\n", key);	
 
@@ -59,9 +58,9 @@ int main(int argc, char *argv[]) {
 	initializeDecryptArray(encrypt, decrypt);
 
        	if (*argv[1] == '1') {
-//                processInput(fin, fout, encrypt);
+                processInput(fin, fout, encrypt);
 	} else if (*argv[1] == '2') {
-//                processInput(fin, fout, decrypt);
+		processInput(fin, fout, decrypt);
 	} else {
 		printf("Here is the option you gave: %s\n", argv[1]);
 		printf("Usage: option, key, infile, outfile\n");  
@@ -118,8 +117,8 @@ void initializeEncryptArray(char key[], char encrypt[]) {
 		} else {
 			// Starts at back of alphabet and checks to see if character is in key
 			// If character is not in key, assign value to to encrypt array 
-			if (!targetFound(key, 27, 122 - z)) { 
-				encrypt[x] = 122 - z;
+			if (!targetFound(key, 27, 90 - z)) { 
+				encrypt[x] = 90 - z;
 			} else { 
 				// If nothing is added to encrypt array, do not change x position
 				x--;
@@ -138,11 +137,29 @@ void initializeDecryptArray(char encrypt[], char decrypt[]) {
 	int x;
 	
 	for (x = 0; x < 26; x++) { 
-		decrypt[encrypt[x] - 'A'] = 'A' + x;
+		decrypt[encrypt[x] - 65] = x + 65;
 	} 
 
 	decrypt[x] = '\0';
 }
+
+void processInput(FILE * inf, FILE * outf, char substitute[]){
+	char ch;
+
+	while (fscanf(inf, "%c", &ch) != EOF) {
+		if(!isalpha(ch)){
+			fprintf(outf, "%c", ch);
+		} else if(islower(ch)){
+			ch = ch - 32;
+			fprintf(outf, "%c", substitute[ch - 65]);
+		} else {
+	      		fprintf(outf, "%c", substitute[ch - 65]);
+		}
+      }
+
+}
+
+
 
 
 
